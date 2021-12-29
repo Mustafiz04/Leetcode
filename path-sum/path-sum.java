@@ -16,29 +16,39 @@
 class Solution {
     public boolean hasPathSum(TreeNode root, int targetSum) {
         if(root == null) return false;
-        Stack<TreeNode> stack = new Stack<>();
-        Stack<Integer> currSum = new Stack<>();
-        stack.push(root);
-        currSum.push(targetSum - root.val);
-        return hasSum(stack, currSum);
-    }
-    public boolean hasSum(Stack<TreeNode> stack, Stack<Integer> sum){
-        while( !stack.isEmpty() ){
-            TreeNode root = stack.pop();
-            int currSum = sum.pop();
-            if( root.left == null && root.right == null && currSum == 0 ){
-                return true;
-            }
-            if(root.left != null){
-                stack.push(root.left);
-                sum.push(currSum - root.left.val);
-            }
-            
-            if(root.right != null){
-                stack.push(root.right);
-                sum.push(currSum - root.right.val);
-            }
+        
+        if( root.left == null && root.right == null && targetSum - root.val == 0 ){
+            return true;
         }
-        return false;
+        boolean left = hasPathSum(root.left, targetSum - root.val);
+        boolean right = hasPathSum(root.right, targetSum - root.val);
+        
+        return left || right;
+        
+        
+        // Stack<TreeNode> stack = new Stack<>();
+        // Stack<Integer> currSum = new Stack<>();
+        // stack.push(root);
+        // currSum.push(targetSum - root.val);
+        // return hasSum(stack, currSum);
     }
+//     public boolean hasSum(Stack<TreeNode> stack, Stack<Integer> sum){
+//         while( !stack.isEmpty() ){
+//             TreeNode root = stack.pop();
+//             int currSum = sum.pop();
+//             if( root.left == null && root.right == null && currSum == 0 ){
+//                 return true;
+//             }
+//             if(root.left != null){
+//                 stack.push(root.left);
+//                 sum.push(currSum - root.left.val);
+//             }
+            
+//             if(root.right != null){
+//                 stack.push(root.right);
+//                 sum.push(currSum - root.right.val);
+//             }
+//         }
+//         return false;
+//     }
 }
