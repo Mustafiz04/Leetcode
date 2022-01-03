@@ -23,26 +23,29 @@ class SpeStack{
 
 /*Complete the function(s) below*/
 class GfG{
-    Stack<Integer> minS = new Stack<>();
+    int minVal = Integer.MAX_VALUE;
 	public void push(int a, Stack<Integer> s){
 	    if( s.isEmpty() ){
-	        minS.push(a);
+	        minVal = a;
+	        s.push(a);
 	    }else{
-	        int y = minS.peek();
-	        if( y < a ){
-	            minS.push(y);
+	        if( a < minVal ){
+	            s.push( 2*a - minVal );
+	            minVal = a;
 	        }else{
-	            minS.push(a);
+	            s.push(a);
 	        }
 	    }
-	    s.push(a);
 	}
 	public int pop(Stack<Integer> s){
-        s.pop();
-        return minS.pop();
+        int pop = s.pop();
+        if( pop < minVal ){
+            minVal = 2*minVal - pop;
+        }
+        return pop;
 	}
 	public int min(Stack<Integer> s){
-        return minS.peek();
+        return minVal;
 	}
 	public boolean isFull(Stack<Integer>s, int n){
         return s.size() == n;
