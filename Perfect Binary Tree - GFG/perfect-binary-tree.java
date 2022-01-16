@@ -116,10 +116,32 @@ class Node {
 
 class Solution{
     public boolean isPerfect(Node root){
-        int maxHeight = mx(root);
-        int minHeight = mn(root);
+        // int maxHeight = mx(root);
+        // int minHeight = mn(root);
         
-        return maxHeight == minHeight;
+        // return maxHeight == minHeight;
+        if(root == null) return true;
+        int lh = height(root.left);
+        int rh = height(root.right);
+        return Math.abs(lh - rh) == 0 && isPerfect(root.left) && isPerfect(root.right);
+    }
+    // boolean isBalanced(Node root){
+    // 	if( root == null ){
+    //         return true;
+    //     }
+    //     int lh = height(root.left);
+    //     int rh = height(root.right);
+        
+    //     return ( Math.abs( lh-rh ) <=1 && isBalanced(root.left) && isBalanced(root.right) );
+            
+    // }
+    
+    public int height(Node root){
+        if( root == null ){
+            return 0;
+        }
+        
+        return Math.max( height(root.left), height(root.right) ) + 1;
     }
     
     public int mx(Node root){
