@@ -37,5 +37,13 @@ class Solution {
             }
         }
         return dp[n][sum];
+        // if( n == 0 ) return 0;
+        // if( sum == 0 ) return 1;
+        
+        // if( S[n-1] > sum ){
+        //     return count(S, n-1, sum);
+        // }else{
+        //     return count(S, n-1, sum) + count(S, n, sum-S[n-1]);
+        // }
     }
 }
