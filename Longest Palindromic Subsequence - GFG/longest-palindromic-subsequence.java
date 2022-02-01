@@ -54,6 +54,5 @@ class Solution{
         String ans = "";
         for(char c : arr) ans += c;
         return ans;
-        
     }
 }
