@@ -23,9 +23,15 @@ class GfG
 
 class Solution{
     public int maxSum(int n) { 
-        if(n == 0) return 0;
-        int x = maxSum(n/2) + maxSum(n/3) + maxSum(n/4);
-        if( n <= x ) return x;
-        else return n;
+        int[] dp = new int[n+1];
+        for(int i = 1; i<=n; i++){
+            dp[i] = Math.max(i, dp[i/2] + dp[i/3] + dp[i/4] );
+        }
+        
+        return dp[n];
+        // if(n == 0) return 0;
+        // int x = maxSum(n/2) + maxSum(n/3) + maxSum(n/4);
+        // if( n <= x ) return x;
+        // else return n;
     } 
 }
