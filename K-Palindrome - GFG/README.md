@@ -1,26 +1,36 @@
 # K-Palindrome
 ## Easy 
 <div class="problem-statement">
-                <p></p><p><span style="font-size:20px">A string is k palindrome if it can be&nbsp;transformed&nbsp;into a palindrome on removing at most k characters from it. Your task is to complete the function <strong>is_k_palin</strong> which takes two&nbsp;arguments a string str and a number N . Your function should return true if the string is k palindrome else it should return false.<br>
-<br>
-<strong>Input:</strong><br>
-The first line of input is an integer T denoting the number of test cases . Then T test cases follow . Each test case &nbsp;contains a string str and an integer N separated by space. &nbsp;<br>
-<br>
-<strong>Output:</strong><br>
-The output will be 1 if the string is &nbsp;k palindrome else 0 .<br>
-<br>
-<strong>Constraints:</strong><br>
-1&lt;=T&lt;=100<br>
-1&lt;=length of str&lt;=100<br>
-1&lt;=N&lt;=20<br>
-<br>
-<strong>Example:<br>
-Input</strong><br>
-2<br>
-abcdecba&nbsp;1<br>
-acdcb&nbsp;&nbsp;1<br>
-<strong>Output</strong><br>
-1<br>
-0</span></p>
+                <p></p><p><span style="font-size:18px">Given a string <strong>str</strong>&nbsp;of length <strong>n,</strong>&nbsp;find&nbsp;if the string is K-Palindrome or not. A k-palindrome string transforms into a palindrome on removing at most <strong>k</strong> characters from it.</span></p>
+
+<p><br>
+<strong><span style="font-size:18px">Example 1:</span></strong></p>
+
+<pre><span style="font-size:18px"><strong>Input:</strong> str = "abcdecba"
+n = 8, k = 1
+<strong>Output:</strong> 1
+<strong>Explaination:</strong> By removing 'd' or 'e' 
+we can make it a palindrome.</span></pre>
+
+<p><br>
+<strong><span style="font-size:18px">Example 2:</span></strong></p>
+
+<pre><span style="font-size:18px"><strong>Input:</strong> str = "abcdefcba"
+n = 9, k = 1
+<strong>Output:</strong> 0
+<strong>Explaination:</strong> By removing a single 
+character we cannot make it a palindrome.</span></pre>
+
+<p><br>
+<span style="font-size:18px"><strong>Your Task:</strong><br>
+You do not need to read input or print anything. Your task is to complete the function <strong>kPalindrome()</strong> which takes string str, n and&nbsp;k as input parameters and returns <strong>1</strong> if str is a K-palindrome else returns <strong>0</strong>.</span></p>
+
+<p><br>
+<span style="font-size:18px"><strong>Expected Time Complexity:</strong> O(n*n)<br>
+<strong>Expected Auxiliary Space:</strong> O(n*n)</span></p>
+
+<p><br>
+<span style="font-size:18px"><strong>Constraints:</strong><br>
+1 ≤ n, k&nbsp;≤ 10<sup>3</sup></span></p>
  <p></p>
             </div>
