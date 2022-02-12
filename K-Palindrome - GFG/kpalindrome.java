@@ -1,82 +1,63 @@
 // { Driver Code Starts
+//Initial Template for Java
+
+import java.io.*;
 import java.util.*;
 
-
-class Remove_Duplicate_From_String
-{
-	public static void main(String args[])
-	{
-		Scanner sc  = new Scanner(System.in);
-		int T = sc.nextInt();
-		sc.nextLine();
-		while(T>0)
-		{
-			String str1 = sc.nextLine();
-			String arr[] = str1.split(" ");
-			//String str1 = sc.nextLine();
-			//sc.skip("\\s*");
-			String str = arr[arr.length-2];
-			int K = Integer.parseInt(arr[arr.length-1]);
-			
-			//int K = Integer.parseInt( sc )
-			//sc.nextLine();
-			//sc.nextInt();
-			
-			
-			//GfG g = new GfG();
-			//System.out.println(str);
-			//System.out.println(K);
-			//System.out.println(new GfG().is_k_palin(str, K));
-
-                       boolean b = new GfG().is_k_palin(str, K);
-			if(b == true)
-				System.out.println(1);
-			else
-				System.out.println(0);
-			
-			
-		T--;
-		}
-	}
+class GFG{
+    public static void main(String args[])throws IOException
+    {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(in.readLine());
+        while(t-- > 0)
+        {
+            String input_line[] = in.readLine().trim().split("\\s+");
+            int n = Integer.parseInt(input_line[0]);
+            int k = Integer.parseInt(input_line[1]);
+            String str = in.readLine();
+            
+            Solution ob = new Solution();
+            System.out.println(ob.kPalindrome(str, n, k));
+        }
+    }
 }// } Driver Code Ends
 
 
-class GfG{
-    boolean is_k_palin(String str, int k){
-        int n = str.length();
-        String t = reverse(str);
-	    int lps = lps(str, t, n);
-	    int diff = n - lps;
-	    if( diff <= k ) return true;
-	    return false;
-    }
+//User function Template for Java
+
+class Solution{
+    static int kPalindrome(String str, int n, int k){
+        int remove = n - LPS(str, reverse(str), n);
+        return remove <= k ? 1 : 0;
+    } 
     
-    int lps(String s, String t, int n){
+    static int LPS(String s, String t, int n){
         int[][] dp = new int[n+1][n+1];
         for(int i = 1; i<=n; i++){
             for(int j = 1; j<=n; j++){
                 if( s.charAt(i-1) == t.charAt(j-1) ){
-                    dp[i][j] = dp[i-1][j-1] + 1;
+                    dp[i][j] = 1 + dp[i-1][j-1];
                 }else{
-                    dp[i][j] = Math.max( dp[i][j-1], dp[i-1][j] );
+                    dp[i][j] = Math.max(dp[i][j-1], dp[i-1][j]);
                 }
             }
         }
         return dp[n][n];
     }
     
-    String reverse(String s){
-        char[] arr = s.toCharArray();
-        int l = 0, r = s.length() - 1;
-        while( l < r ){
-            char temp = arr[l];
-            arr[l] = arr[r];
-            arr[r] = temp;
-            l++;
-            r--;
-        }
-        String ans = "";
-        for(char c : arr) ans += c;
-        return ans;
+    static public String reverse(String s) {
+    char[] arr = s.toCharArray();
+    int l = 0, r = arr.length - 1;
+    while (l <= r) {
+        char temp = arr[l];
+        arr[l] = arr[r];
+        arr[r] = temp;
+        l++;
+        r--;
     }
+    String ans = "";
+    for (char c : arr)
+        ans += c;
+    return ans;
+  }
 }
