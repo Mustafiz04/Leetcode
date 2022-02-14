@@ -121,7 +121,8 @@ public class Solution{
     boolean isBSTUtil(Node root, int min, int max){
         if( root == null ){
             return true;
-        }else if( root.data < min || root.data > max ){
+        }
+        if( root.data < min || root.data > max ){
             return false;
         }
         return isBSTUtil(root.left, min, root.data - 1) && isBSTUtil(root.right, root.data +1, max);
