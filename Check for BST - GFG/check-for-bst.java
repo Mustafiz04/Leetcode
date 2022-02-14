@@ -114,17 +114,12 @@ class GfG {
 
 public class Solution{
     boolean isBST(Node root){
-        int left = Integer.MIN_VALUE, right = Integer.MAX_VALUE;
-        return isBSTUtil(root, left, right);
+        return isBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
     
-    boolean isBSTUtil(Node root, int min, int max){
-        if( root == null ){
-            return true;
-        }
-        if( root.data < min || root.data > max ){
-            return false;
-        }
-        return isBSTUtil(root.left, min, root.data - 1) && isBSTUtil(root.right, root.data +1, max);
+    boolean isBST(Node root, int min, int max){
+        if( root == null ) return true;
+        if( root.data < min || root.data > max ) return false;
+        return isBST(root.left, min, root.data-1) && isBST(root.right, root.data+1, max);
     }
 }
