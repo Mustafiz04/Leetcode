@@ -36,20 +36,20 @@ class GFG {
 
 class Solution {
     public static int firstRepeated(int[] arr, int n) {
-        // HashMap<Integer, Integer> map = new HashMap<>();
-        // for(int i : arr) map.put(i, map.getOrDefault(i, 0) + 1);
-        // for(int i=0; i<n; i++){
-        //     if( map.get(arr[i]) > 1 ) return i+ 1;
-        // }
-        // return -1;
-        HashSet<Integer> set = new HashSet<>();
-        int min = -1;
-        for(int i = n-1; i>=0; i--){
-            if( set.contains(arr[i]) ){
-                min = i+1;
-            }
-            set.add(arr[i]);
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int i : arr) map.put(i, map.getOrDefault(i, 0) + 1);
+        for(int i=0; i<n; i++){
+            if( map.get(arr[i]) > 1 ) return i+ 1;
         }
-        return min;
+        return -1;
+        // HashSet<Integer> set = new HashSet<>();
+        // int min = -1;
+        // for(int i = n-1; i>=0; i--){
+        //     if( set.contains(arr[i]) ){
+        //         min = i+1;
+        //     }
+        //     set.add(arr[i]);
+        // }
+        // return min;
     }
 }
