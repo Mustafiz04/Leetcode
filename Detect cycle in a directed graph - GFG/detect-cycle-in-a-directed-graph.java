@@ -34,10 +34,8 @@ class Solution {
     public boolean isCyclic(int V, ArrayList<ArrayList<Integer>> adj){
         int[] vis = new int[V];
         for(int i = 0; i< V; i++){
-            if( vis[i] != 1 )
-                if(isCyclicUtil(i, adj, vis)){
-                    return true;
-                }
+            if( vis[i] != 1 && isCyclicUtil(i, adj, vis) )
+                return true;
         }
         return false;
     }
@@ -48,10 +46,8 @@ class Solution {
         }
         vis[src] = 2;
         for(int next : adj.get(src)){
-            if( vis[next] != 1 ){
-                if(isCyclicUtil(next, adj, vis)){
-                    return true;
-                }
+            if( vis[next] != 1 && isCyclicUtil(next, adj, vis) ){
+                return true;
             }
         }
         vis[src] = 1;
