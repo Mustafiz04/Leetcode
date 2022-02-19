@@ -43,7 +43,26 @@ class Solution {
     public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj){
         boolean[] vis = new boolean[V];
         for(int i = 0; i< V; i++){
-            if( !vis[i] && isCycleBFS(i, adj, vis) ){
+            // BFS
+            // if( !vis[i] && isCycleBFS(i, adj, vis) ){
+            //     return true;
+            // }
+            // DFS
+            if( !vis[i] && isCycleDFS(i, -1, adj, vis) ){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean isCycleDFS(int node, int parent, ArrayList<ArrayList<Integer>> adj, boolean[] vis){
+        vis[node] = true;
+        for(int next : adj.get(node)){
+            if( !vis[next] ){
+                if( isCycleDFS(next, node, adj, vis) ){
+                    return true;   
+                }
+            }else if( next != parent ) {
                 return true;
             }
         }
