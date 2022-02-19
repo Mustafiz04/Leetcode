@@ -37,11 +37,11 @@ class Solution {
     public ArrayList<Integer> dfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
         ArrayList<Integer> ans = new ArrayList<Integer>();
         boolean[] vis = new boolean[V];
-        // DFSUtil(0, adj, vis, ans);
-        for(int i = 0; i<V; i++){
-            if( !vis[i] )
-                DFSUtil(i, adj, vis, ans);
-        }
+        DFSUtil(0, adj, vis, ans);
+        // for(int i = 0; i<V; i++){
+        //     if( !vis[i] )
+        //         DFSUtil(i, adj, vis, ans);
+        // }
         return ans;
     }
     
