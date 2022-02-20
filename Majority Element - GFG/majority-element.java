@@ -30,20 +30,39 @@ class Geeks
 
 class Solution{
     static int majorityElement(int arr[], int n){
-        if( n == 1) return arr[0];
-        HashMap<Integer, Integer> hm = new HashMap<Integer,Integer>();
-		for(int i = 0; i<n; i++){
-		    if( hm.containsKey(arr[i]) ){
-		        int val = hm.get(arr[i])+1;
-		        if(val > n/2){
-		            return arr[i];
-		        }else{
-		            hm.put(arr[i], val);
-		        }
-		    }else{
-		        hm.put(arr[i], 1);
-		    }
-		}
-		return -1;
+        int majorityIndex = 0, count = 1;
+        for(int i = 1; i<n; i++){
+            if( arr[majorityIndex] == arr[i] ){
+                count++;
+            }else{
+                count--;
+                if( count == 0 ){
+                    majorityIndex = i;
+                    count = 1;
+                }
+            }
+        }
+        count = 0;
+        int majority = arr[majorityIndex];
+        for(int i : arr){
+            if( i == majority ) count++;
+        }
+        if( count > n/2 ) return majority;
+        return -1;
+//         if( n == 1) return arr[0];
+//         HashMap<Integer, Integer> hm = new HashMap<Integer,Integer>();
+// 		for(int i = 0; i<n; i++){
+// 		    if( hm.containsKey(arr[i]) ){
+// 		        int val = hm.get(arr[i])+1;
+// 		        if(val > n/2){
+// 		            return arr[i];
+// 		        }else{
+// 		            hm.put(arr[i], val);
+// 		        }
+// 		    }else{
+// 		        hm.put(arr[i], 1);
+// 		    }
+// 		}
+// 		return -1;
     }
 }
