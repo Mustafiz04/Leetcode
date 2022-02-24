@@ -31,15 +31,15 @@ class GFG
 class Solution{
     public static int countKdivPairs(int arr[], int n, int k){
         int[] rem = new int[k+1];
-        if(n == 0) return 0;
+        if( n == 0 ) return 0;
         int count = 0;
-        for(int num : arr){
-            if( num % k == 0 ){
+        for(int i : arr){
+            if( i % k == 0 ){
                 count += rem[0];
             }else{
-                count += rem[k - num % k];
+                count += rem[k - i % k];
             }
-            rem[num % k]++;
+            rem[i % k]++;
         }
         return count;
     }
