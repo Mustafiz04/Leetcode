@@ -20,7 +20,7 @@ A[] = {5, 9, 36, 74, 52, 31, 42}, K = 3
 <strong>Output :</strong> 7 
 <strong>Explanation : </strong>
 There are seven pairs whose sum is divisible by 3, 
-i.e, (5, 9), (9, 36), (74, 52), (36, 42), (74, 31), 
+i.e, (9, 36), (9,42), </span><span style="font-size:18px">(74, 52), (36, 42), (74, 31), 
 (31, 5) and (5, 52).
 </span></pre>
 
