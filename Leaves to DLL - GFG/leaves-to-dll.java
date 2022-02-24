@@ -141,7 +141,7 @@ class Tree{
     public boolean inorder(Node root){
         if( root == null ) return false;
         boolean left = inorder(root.left);
-        
+        boolean right = inorder(root.right);
         if( root.left == null && root.right == null){
             if( head == null ){
                 head = root;
@@ -156,7 +156,7 @@ class Tree{
             return true;
         }
         
-        boolean right = inorder(root.right);
+        
         if( left ) root.left = null;
         if( right ) root.right = null;
         
