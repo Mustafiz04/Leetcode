@@ -1,22 +1,22 @@
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
         List<List<String>> ans = new ArrayList<>();
+        HashMap<String, List<String>> hm = new HashMap<>();
         int n = strs.length;
-        if( n == 0 ) return ans;
+        if(n == 0) return ans;
+        
         for(int i = 0; i<n; i++){
-            if( strs[i] != "#" ){
-                List<String> anagramWords = new ArrayList<>();
-                anagramWords.add(strs[i]);
-                for(int j = i+1; j<n; j++){
-                    if( anagram(strs[i], strs[j]) ){
-                        anagramWords.add(strs[j]);
-                        strs[j] = "#";
-                    }
-                }
-                ans.add(anagramWords);
+            String curr = strs[i];
+            char[] arr = curr.toCharArray();
+            Arrays.sort(arr);
+            String sorted = new String(arr);
+            
+            if( !hm.containsKey(sorted) ){
+                hm.put(sorted, new ArrayList<>());
             }
+            hm.get(sorted).add(curr);
         }
-        return ans;
+        return new ArrayList(hm.values());
     }
     
     public boolean anagram(String a, String b){
