@@ -27,14 +27,10 @@ class Solution{
     public long countFriendsPairings(int n) { 
     //   if( n <= 2 ) return n;
     //   return countFriendsPairings(n-1) + countFriendsPairings(n-2)*(n-1);
-        if( n == 0 ) return 0;
-        if( n == 1 ) return 1;
-        if( n == 2 ) return 2;
         long[] dp = new long[n+1];
-        dp[1] = 1;
-        dp[2] = 2;
-        for(int i = 3; i<=n; i++ ){
-            dp[i] = (dp[i-1] + dp[i-2]*(i-1))%MOD;
+        for(int i = 0; i<=n; i++ ){
+            if( i <= 2 ) dp[i] = i;
+            else dp[i] = (dp[i-1] + dp[i-2]*(i-1))%MOD;
         }
         return dp[n]%MOD;
     }
