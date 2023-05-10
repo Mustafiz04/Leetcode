@@ -1,32 +1,26 @@
 class Solution {
-    public int[][] generateMatrix(int n) {
-        int[][] ans = new int[n][n];
-        int top = 0, down = n-1, left = 0, right = n-1;
-        int dir = 0, num = 1;
-        while( top <= down && left <= right ) {
-            if( dir == 0 ) {
-                for(int i = left; i<=right; i++) {
-                    ans[top][i] = num++;
+    public int numEnclaves(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if ((i == 0 || j == 0 || i == m - 1 || j == n - 1) && grid[i][j] == 1) {
+                    dfs(grid, i, j);
                 }
-                top++;
-            } else if( dir == 1 ) {
-                for(int i = top; i<=down; i++) {
-                    ans[i][right] = num++;
-                }
-                right--;
-            } else if( dir == 2 ) {
-                for(int i = right; i>= left; i-- ) {
-                    ans[down][i] = num++;
-                }
-                down--;
-            } else if( dir == 3 ) {
-                for(int i = down; i>= top; i--) {
-                    ans[i][left] = num++;
-                }
-                left++;
             }
-            dir = (dir + 1) % 4;
         }
-        return ans;
+        return Arrays.stream(grid).mapToInt(row -> Arrays.stream(row).sum()).sum();
+    }
+    
+    private void dfs(int[][] grid, int i, int j) {
+        grid[i][j] = 0;
+        int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+        for (int[] direction : directions) {
+            int x = i + direction[0];
+            int y = j + direction[1];
+            if (x >= 0 && x < grid.length && y >= 0 && y < grid[0].length && grid[x][y] == 1) {
+                dfs(grid, x, y);
+            }
+        }
     }
 }
