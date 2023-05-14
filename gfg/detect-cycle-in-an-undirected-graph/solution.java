@@ -1,5 +1,3 @@
-...// } Driver Code Ends
-class Node {
     int node, parent;
     Node(int node, int parent) {
         this.node = node;
@@ -7,36 +5,38 @@ class Node {
     }
 }
 class Solution {
-    public boolean checkCycle(int i, ArrayList<ArrayList<Integer>> adj, boolean[] vis) {
-        Queue<Node> q = new LinkedList<>();
-        q.add(new Node(i, -1));
-        vis[i] = true;
+    // DFS
+    public boolean checkCycle(int node, int parent, ArrayList<ArrayList<Integer>> adj, boolean[] vis) {
+        vis[node] = true;
         
-        while(!q.isEmpty()) {
-            Node curr = q.poll();
-            int node = curr.node;
-            int parent = curr.parent;
-            
-            for(int n: adj.get(node)) {
-                if( !vis[n] ) {
-                    q.add(new Node(n, node));
-                    vis[n] = true;
-                } else if( parent != n ) {
-                    return true;
-                }
+        for(int n: adj.get(node)) {
+            if( !vis[n] ) {
+                if( checkCycle(n, node, adj, vis) ) return true;
+            } else if( n != parent ) {
+                return true;
             }
         }
         return false;
     }
+    
+    // BFS
+    // public boolean checkCycle(int i, ArrayList<ArrayList<Integer>> adj, boolean[] vis) {...// }
     
     public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj) {
         boolean[] vis = new boolean[V];
         
         for(int i = 0; i<V; i++) {
             if( !vis[i] ) {
-                if(checkCycle(i, adj, vis) ) {
-                    return true;
-                }
+                // BFS
+                // if(checkCycle(i, adj, vis) ) {
+                //     return true;
+                // }
+                
+                // DFS
+                if( checkCycle(i, -1, adj, vis) ) return true;
             }
         }
         
+        return false;
+    }
+}
