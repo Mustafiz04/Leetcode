@@ -1,37 +1,47 @@
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
+class Node {
+    int x, y, step;
+    Node(int x, int y, int step) {
+        this.x = x;
+        this.y = y;
+        this.step = step;
+    }
+}
 class Solution {
-    public ListNode swapNodes(ListNode head, int k) {
-        ListNode temp = head;
-        int len = 0;
-        while(temp != null) {
-            len++;
-            temp = temp.next;
-        }
-        int fromBeg = k, fromEnd = len - k;
-        temp = head;
-        while( fromBeg > 1 ) {
-            temp = temp.next;
-            fromBeg--;
-        }
-        ListNode fromBegNode = temp;
-        temp = head;
-        while( fromEnd > 0 ) {
-            temp = temp.next;
-            fromEnd--;
-        }
-        int a = temp.val;
-        temp.val = fromBegNode.val;
-        fromBegNode.val = a;
+    public int[][] updateMatrix(int[][] mat) {
+        int row = mat.length;
+        int col = mat[0].length;
+        boolean[][] vis = new boolean[row][col];
+        Queue<Node> q = new LinkedList<>();
 
-        return head;
+        for(int i = 0; i<row; i++) {
+            for(int j = 0; j<col; j++) {
+                if( mat[i][j] == 0 ) {
+                    vis[i][j] = true;
+                    q.add(new Node(i, j, 0));
+                }
+            }
+        }
+
+        int[] xdir = {1, -1, 0, 0};
+        int[] ydir = {0, 0, 1, -1};
+
+        while( !q.isEmpty() ) {
+            Node curr = q.poll();
+            int x = curr.x;
+            int y = curr.y;
+            int step = curr.step;
+            mat[x][y] = step;
+
+            for(int i = 0; i<4; i++) {
+                int newX = x + xdir[i];
+                int newY = y + ydir[i];
+                if( newX >= 0 && newX < row && newY >= 0 && newY < col && vis[newX][newY] == false ) {
+                    vis[newX][newY] = true;
+                    q.add(new Node(newX, newY, step+1));
+                }
+            }
+        }
+
+        return mat;
     }
 }
