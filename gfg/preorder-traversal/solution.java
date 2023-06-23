@@ -10,16 +10,16 @@
 // }
 class BinaryTree{
     static ArrayList<Integer> preorder(Node root){
-        ArrayList<Integer> ans = new ArrayList<Integer>();
-        if(root == null) return ans;
-        getPreorder(root, ans);
+        ArrayList<Integer> ans = new ArrayList<>();
+        if( root == null ) return ans;
+        Stack<Node> s = new Stack<>();
+        s.push(root);
+        while( !s.isEmpty() ) {
+            Node currNode = s.pop();
+            ans.add(currNode.data);
+            if( currNode.right != null ) s.push(currNode.right);
+            if( currNode.left != null ) s.push(currNode.left);
+        }
         return ans;
-    }
-    
-    static void getPreorder(Node root, ArrayList<Integer> ans) {
-        if( root == null ) return;
-        ans.add(root.data);
-        getPreorder(root.left, ans);
-        getPreorder(root.right, ans);
     }
 }
