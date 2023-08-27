@@ -1,46 +1,37 @@
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
 class Solution {
-    public List<Integer> inorderTraversal(TreeNode curr) {
-        // List<Integer> res = new ArrayList<>();
-        // helper(root, res);
-        // return res;
+    HashMap<Integer,Integer> mark = new HashMap<Integer,Integer>();
+    boolean dp[][] = new boolean[2001][2001];
 
-        List<Integer> inOrder = new ArrayList < > ();
-        Stack<TreeNode> s = new Stack<>();
-        while (true) {
-            if (curr != null) {
-                s.push(curr);
-                curr = curr.left;
-            } else {
-                if (s.isEmpty()) break;
-                curr = s.peek();
-                inOrder.add(curr.val);
-                s.pop();
-                curr = curr.right;
+    public boolean canCross(int[] stones) {
+        int n = stones.length;
+        for (int i = 0 ; i < n; i++) {
+            mark.put(stones[i], i);
+        }
+
+        dp[0][0] = true;
+        for (int index = 0; index < n; index++) {
+            for (int prevJump = 0; prevJump <= n; prevJump++) {
+                if (dp[index][prevJump]) {
+                    if (mark.containsKey(stones[index] + prevJump)) {
+                        dp[mark.get(stones[index] + prevJump)][prevJump] = true;
+                    }
+                    if (mark.containsKey(stones[index] + prevJump + 1)) {
+                        dp[mark.get(stones[index] + prevJump + 1)][prevJump + 1] = true;
+                    }
+                    if (mark.containsKey(stones[index] + prevJump - 1)) {
+                        dp[mark.get(stones[index] + prevJump - 1)][prevJump - 1] = true;
+                    }
+                }
+
+
             }
         }
-        return inOrder;
-    }
 
-    public void helper(TreeNode root, List<Integer> res) {
-        if (root != null) {
-            helper(root.left, res);
-            res.add(root.val);
-            helper(root.right, res);
+        for (int index = 0; index <= n; index++) {
+            if (dp[n - 1][index]) {
+                return true;
+            }
         }
+        return false;
     }
 }
