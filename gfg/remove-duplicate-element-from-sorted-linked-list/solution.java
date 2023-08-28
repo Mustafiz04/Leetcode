@@ -9,19 +9,18 @@ class Node
     }
 */
 
-class GfG
-{
+class GfG{
     Node removeDuplicates(Node head){
-        if( head == null ) return null;
-        Node curr = head, prev = head;
-        while( curr != null ) {
-            if( curr.data != prev.data ) {
-                prev.next = curr;
-                prev = prev.next;
-            }
-            curr = curr.next;
-        }
-        prev.next = null;
-        return head;
+	    if( head == null ) return head;
+	    Node curr = head.next, prev = head;
+	    while(curr != null) {
+	        if( curr.data != prev.data ) {
+	            prev.next = curr;
+	            prev = curr;
+	        }
+	        curr = curr.next;
+	    }
+	    prev.next = null;
+	    return head;
     }
 }
